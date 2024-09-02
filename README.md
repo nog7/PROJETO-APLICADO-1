@@ -2,7 +2,9 @@
 
 
 ## 📄 Sumário
+
 base/
+
 Microsoft_Stock.CSV
 .gitignore
 README.md
