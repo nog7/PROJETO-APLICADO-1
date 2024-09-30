@@ -4,6 +4,8 @@
 
 - **base/**
   - **Microsoft_Stock.CSV**
+- **Scripts/**
+  - **mstock_eda.py**
 
 - **README.md**
 
