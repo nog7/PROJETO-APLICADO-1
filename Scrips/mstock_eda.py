@@ -8,8 +8,8 @@ from plotly.subplots import make_subplots
 
 st.set_page_config(
     page_title="Análise Exploratória de Dados",
-    page_icon=":bar_chart:",  # Emoji de gráfico para análise de dados
-    layout="wide",  # ou "centered"
+    page_icon=":bar_chart:",  
+    layout="wide",
 )
 
 
