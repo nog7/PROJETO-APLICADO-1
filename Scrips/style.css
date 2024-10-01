@@ -1,0 +1,133 @@
+body {
+    background-color: #121212; 
+    color: #ffffff; 
+    font-family: 'Arial', sans-serif; 
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #2e003e; 
+    color: #ffffff; 
+    padding: 20px; 
+    text-align: center; 
+    border-bottom: 4px solid #6a1b9a; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); 
+}
+
+.stButton button {
+    background-color: #6a1b9a; 
+    color: #ffffff; 
+    border: none;
+    border-radius: 8px; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; 
+    outline: none; 
+}
+
+.stButton button:hover {
+    background-color: #2e003e; 
+    transform: scale(1.05);
+}
+
+.stButton button:focus {
+    background-color: #2e003e; 
+    box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.4); 
+    color: #ffffff;
+}
+
+/* Estilo para o texto dentro do botão */
+.stButton button span {
+    color: #ffffff;
+}
+
+/* Estilo para os campos de texto */
+.stTextInput input {
+    background-color: #1c1c1c; 
+    color: #ffffff; 
+    border: 1px solid #6a1b9a; 
+    border-radius: 8px; 
+    padding: 10px; 
+    font-size: 16px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); 
+}
+
+/* Estilo para a sidebar */
+.sidebar .sidebar-content {
+    background-color: #2e003e; 
+    color: #ffffff; 
+    border-right: 2px solid #6a1b9a; 
+    padding: 20px; 
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.5); 
+    text-align: center; 
+}
+
+.sidebar .sidebar-content h1,
+.sidebar .sidebar-content h2,
+.sidebar .sidebar-content h3 {
+    margin: 0; 
+    font-size: 1.5em; 
+}
+
+.sidebar .sidebar-content p {
+    margin: 0; 
+}
+
+a {
+    color: #6a1b9a; 
+    text-decoration: none; 
+}
+
+a:hover {
+    text-decoration: underline; 
+    color: #ffffff; 
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse; 
+    margin: 20px 0; 
+}
+
+th, td {
+    border: 1px solid #6a1b9a; 
+    padding: 10px; 
+    text-align: left; 
+}
+
+th {
+    background-color: #2e003e; 
+    color: #ffffff; 
+    font-weight: bold; 
+}
+
+tr:nth-child(even) {
+    background-color: #1c1c1c;
+}
+
+tr:nth-child(odd) {
+    background-color: #121212;
+}
+
+/* Estilo para gráficos */
+.chart-container {
+    background-color: #1c1c1c; 
+    border: 1px solid #6a1b9a; 
+    border-radius: 8px; 
+    padding: 20px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    margin: 20px 0; 
+}
+
+/* Estilo para cartões (widgets) */
+.card {
+    background-color: #1c1c1c;
+    border: 1px solid #6a1b9a; 
+    border-radius: 8px; 
+    padding: 20px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); 
+    margin: 20px 0;
+}
