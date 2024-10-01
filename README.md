@@ -7,7 +7,7 @@
 - **Scripts/**
   - **mstock_eda.py**
   - **style.css**
-  - **.streamlit**
+  - **.streamlit/**
     - **config.toml**
 
 - **README.md**
