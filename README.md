@@ -6,6 +6,9 @@
   - **Microsoft_Stock.CSV**
 - **Scripts/**
   - **mstock_eda.py**
+  - **style.css**
+  - **.streamlit**
+    - **config.toml**
 
 - **README.md**
 
