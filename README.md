@@ -4,13 +4,13 @@
 
 - **base/**
   - **Microsoft_Stock.CSV**
+- **Documentação/**
+  - **PROJETO APLICADO I.pdf**
 - **Scripts/**
   - **mstock_eda.py**
   - **style.css**
   - **.streamlit/**
     - **config.toml**
-- **Documentação/**
-  - **PROJETO APLICADO I.pdf**
 
 - **README.md**
 
