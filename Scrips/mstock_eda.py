@@ -5,11 +5,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
+from statsmodels.tsa.statespace.sarimax import SARIMAX
+import warnings
+warnings.filterwarnings("ignore")
 
 st.set_page_config(
     page_title="Análise Exploratória de Dados",
-    page_icon=":bar_chart:",  
-    layout="wide",
+    page_icon=":bar_chart:",  # Emoji de gráfico para análise de dados
+    layout="wide",  # ou "centered"
 )
 
 
@@ -62,12 +65,11 @@ elif st.session_state.page == 'Análise Exploratória dos Dados':
 
     # Criar uma lista suspensa para selecionar o gráfico
 
+    # Nova opção para a análise
     analysis_option = st.selectbox(
         'Escolha a análise a ser exibida:',
-        ['Gráficos de Séries Temporais', 'Preço Mais Alto e Mais Baixo', 'Preço de Fechamento e Média Móvel', 'Mudança Diária no Preço']
+        ['Gráficos de Séries Temporais', 'Preço Mais Alto e Mais Baixo', 'Preço de Fechamento e Média Móvel', 'Mudança Diária no Preço', 'Previsão com SARIMAX']
     )
-
-    
     
     if analysis_option == 'Gráficos de Séries Temporais':
         st.subheader('Gráficos de Séries Temporais')
@@ -130,7 +132,7 @@ elif st.session_state.page == 'Análise Exploratória dos Dados':
 
         df['Moving Average'] = df['Close'].rolling(window=180).mean()
 
-        # Função para plotar o preço de fechamento e a média móvel usando Plotly
+        # plotar o preço de fechamento e a média móvel usando Plotly
         def plot_moving_average(df):
             fig = go.Figure()
             fig.add_trace(go.Scatter(
@@ -189,3 +191,63 @@ elif st.session_state.page == 'Análise Exploratória dos Dados':
         # Plotar o gráfico
         daily_change_fig = plot_daily_change(df)
         st.plotly_chart(daily_change_fig)
+
+
+    # Previsão com SARIMAX
+    if analysis_option == 'Previsão com SARIMAX':
+        st.subheader('Previsão com SARIMAX')
+
+        closing_prices = df['Close']
+
+        # parâmetros do modelo SARIMAX 
+        p, d, q = 1, 1, 1  
+        P, D, Q, s = 1, 1, 1, 12 
+        
+        model = SARIMAX(closing_prices, order=(p, d, q), seasonal_order=(P, D, Q, s))
+        sarimax_model = model.fit(disp=False)
+
+        # passos de previsão
+        passos_previsao = 240
+
+        forecast = sarimax_model.get_forecast(steps=passos_previsao)
+        forecast_mean = forecast.predicted_mean
+        forecast_conf_int = forecast.conf_int()
+
+        forecast_dates = pd.date_range(df.index[-1] + pd.Timedelta(days=1), periods=passos_previsao)
+
+        # dados históricos de fechamento e a previsão
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(
+            x=df.index, y=closing_prices, mode='lines', name='Preço de Fechamento',
+            line=dict(color='blue')
+        ))
+        fig.add_trace(go.Scatter(
+            x=forecast_dates, y=forecast_mean, mode='lines', name='Previsão SARIMAX',
+            line=dict(color='red', dash='dash')
+        ))
+        fig.add_trace(go.Scatter(
+            x=forecast_dates, y=forecast_conf_int['lower Close'], mode='lines', name='Limite Inferior',
+            line=dict(color='rgba(255, 0, 0, 0.3)')
+        ))
+        fig.add_trace(go.Scatter(
+            x=forecast_dates, y=forecast_conf_int['upper Close'], mode='lines', name='Limite Superior',
+            line=dict(color='rgba(255, 0, 0, 0.3)')
+        ))
+        fig.update_layout(
+            title='Previsão do Preço de Fechamento com SARIMAX',
+            xaxis_title='Data',
+            yaxis_title='Preço de Fechamento (USD)',
+            legend_title='Legenda',
+            height=600,
+            width=900
+        )
+
+        st.plotly_chart(fig)
+
+        st.subheader("Métricas de Avaliação do Modelo")
+        mae = np.mean(np.abs(forecast_mean - closing_prices[-passos_previsao:])) 
+        rmse = np.sqrt(np.mean((forecast_mean - closing_prices[-passos_previsao:]) ** 2))  
+        st.write(f"MAE: {mae:.2f}")
+        st.write(f"RMSE: {rmse:.2f}")
+
+
