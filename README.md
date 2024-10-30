@@ -9,6 +9,8 @@
   - **style.css**
   - **.streamlit/**
     - **config.toml**
+- **Documentação/**
+  - **PROJETO APLICADO I.pdf**
 
 - **README.md**
 
